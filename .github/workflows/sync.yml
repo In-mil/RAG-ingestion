@@ -1,0 +1,43 @@
+# sync.yml
+name: Sync Docs to OpenWebUI
+
+# This workflow runs automatically when docs change on main,
+# or manually via the "Run workflow" button in GitHub Actions.
+on:
+  # Trigger on every push to main that touches markdown files inside the docs content folder.
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/docs/**'
+  # Allow manual trigger from the GitHub Actions UI (useful for initial bulk upload).
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repo so sync.py can read the local src/content/docs/ folder.
+      # fetch-depth: 1 (the default) is enough because sync.py compares files
+      # against the Open WebUI API, not against Git history. A full clone would
+      # only waste CI time and bandwidth.
+      - uses: actions/checkout@v4
+
+      # Install Python (must match the version sync.py is written for).
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Install dependencies like requests and python-dotenv.
+      - run: pip install -r RAG-pipeline/custom_requirements.txt
+
+      # Run the sync script. It compares local docs against Open WebUI
+      # and uploads, updates, or deletes files as needed.
+      # Secrets are injected as env variables so sync.py can read them via os.getenv().
+      # DOCS_DIR tells sync.py where the markdown files live in this repo.
+      - name: Sync to OpenWebUI
+        env:
+          OPEN_WEBUI_API_URL: ${{ secrets.OPEN_WEBUI_API_URL }}
+          OPEN_WEBUI_API_KEY: ${{ secrets.OPEN_WEBUI_API_KEY }}
+          KNOWLEDGE_ID: ${{ secrets.KNOWLEDGE_ID }}
+          DOCS_DIR: src/content/docs
+        run: python RAG-pipeline/sync.py
