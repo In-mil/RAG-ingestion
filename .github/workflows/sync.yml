@@ -22,11 +22,6 @@ jobs:
       # only waste CI time and bandwidth.
       - uses: actions/checkout@v4
 
-      # Install Python (must match the version sync.py is written for).
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
       # Install dependencies like requests and python-dotenv.
       - run: pip install -r RAG-pipeline/custom_requirements.txt
 
