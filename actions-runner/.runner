@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "Test-Runner",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus10.actions.githubusercontent.com/2FZGInBhg5Mu5lEcJsGqOYROCpYNkkI0YqPnCGYT5Mn8uiqU9W/",
+  "gitHubUrl": "https://github.com/In-mil/RAG-ingestion",
+  "workFolder": ".\\run.cmd",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
