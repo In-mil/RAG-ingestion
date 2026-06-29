@@ -14,7 +14,7 @@ on:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       # Check out the repo so sync.py can read the local src/content/docs/ folder.
       # fetch-depth: 1 (the default) is enough because sync.py compares files
