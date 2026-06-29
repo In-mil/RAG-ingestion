@@ -54,7 +54,7 @@ def fetch_state() -> dict[str, str]:
     # Build a lookup dict: normalized filename -> Open WebUI file ID.
     # This lets us quickly check if a local file already exists remotely.
     state: dict[str, str] = {}
-    for f in r.json().get("files", []):
+    for f in (r.json() or {}).get("files") or []:
         name = f["meta"]["name"]
         state[name] = f["id"]
     return state
