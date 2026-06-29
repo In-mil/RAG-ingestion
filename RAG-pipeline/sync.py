@@ -85,7 +85,7 @@ def upload_file(path: str) -> str | None:
                     "process": "true",
                     "process_in_background": "false",
                 },
-                files={"file": (file_name, file_obj, "text/plain")},
+                files={"file": (file_name, file_obj, "text/markdown")},
                 timeout=120,
             )
     except OSError as exc:
