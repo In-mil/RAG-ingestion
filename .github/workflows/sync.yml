@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Install dependencies like requests and python-dotenv.
-      - run: pip install -r RAG-pipeline/custom_requirements.txt
+      - run: python -m pip install -r RAG-pipeline/custom_requirements.txt
 
       # Run the sync script. It compares local docs against Open WebUI
       # and uploads, updates, or deletes files as needed.
